@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    # This path must exist on your Kubernetes node.
+    # Run 'sudo mkdir -p /mnt/data/postgres' on your node before applying this.
+    path: "/mnt/data/postgres"
+  persistentVolumeReclaimPolicy: Retain # Keep the data even if the PV is deleted
