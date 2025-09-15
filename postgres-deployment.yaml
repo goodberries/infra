@@ -28,6 +28,8 @@ spec:
           volumeMounts:
             - name: postgres-storage
               mountPath: /var/lib/postgresql/data
+            - name: postgres-config-volume
+              mountPath: /etc/postgresql/
           readinessProbe:
             exec:
               command: ["pg_isready", "-U", "postgres", "-d", "feedback_db"]
@@ -37,3 +39,6 @@ spec:
         - name: postgres-storage
           persistentVolumeClaim:
             claimName: postgres-pvc
+        - name: postgres-config-volume
+          configMap:
+            name: postgres-config
